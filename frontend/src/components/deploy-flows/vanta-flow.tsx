@@ -25,6 +25,9 @@ export function VantaFlow() {
   { name: string; status: string; output?: string }[]
 >([]);
   const [deploymentId, setDeploymentId] = useState<string | null>(null);
+  const [walletName, setWalletName] = useState("");
+const [hotkeyName, setHotkeyName] = useState("");
+const [walletPassword, setWalletPassword] = useState("");
 
   async function startDeploy() {
     setStep("deploying");
@@ -37,10 +40,14 @@ export function VantaFlow() {
       body: JSON.stringify({
         environment,
         wallet,
+        walletName,
+hotkeyName,
+walletPassword,
         asset,
         collateral,
         signals,
         infra,
+        
       }),
     });
 
@@ -89,25 +96,41 @@ export function VantaFlow() {
             {environment && <Done label="environment selected" value={environment} />}
 
             <StepBlock title="wallet setup" show={step !== "environment"}>
-              <Option
-                active={wallet === "create"}
-                label="[1] Create new coldkey + hotkey"
-                hint="beginner"
-                onClick={() => {
-                  setWallet("create new wallet");
-                  setStep("asset");
-                }}
-              />
-              <Option
-                active={wallet === "existing-coldkey"}
-                label="[2] Use existing coldkey + create new hotkey"
-                hint="recommended if you already have wallet"
-                onClick={() => {
-                  setWallet("existing coldkey + new hotkey");
-                  setStep("asset");
-                }}
-              />
-            </StepBlock>
+  <div className="space-y-2 pl-1">
+    <input
+      value={walletName}
+      onChange={(e) => setWalletName(e.target.value)}
+      placeholder="wallet name e.g. mido-wallet"
+      className="w-full rounded border border-[#3a3a3a] bg-black/30 px-2 py-1 text-[#e6e6e6] outline-none"
+    />
+
+    <input
+      value={hotkeyName}
+      onChange={(e) => setHotkeyName(e.target.value)}
+      placeholder="hotkey name e.g. vanta-miner-1"
+      className="w-full rounded border border-[#3a3a3a] bg-black/30 px-2 py-1 text-[#e6e6e6] outline-none"
+    />
+
+    <input
+      value={walletPassword}
+      onChange={(e) => setWalletPassword(e.target.value)}
+      placeholder="wallet password"
+      type="password"
+      className="w-full rounded border border-[#3a3a3a] bg-black/30 px-2 py-1 text-[#e6e6e6] outline-none"
+    />
+
+    <button
+      onClick={() => {
+        setWallet("deploytao managed wallet");
+        setStep("asset");
+      }}
+      disabled={!walletName || !hotkeyName || !walletPassword}
+      className="rounded-sm px-2 py-0.5 text-[#1b8088] transition hover:bg-white/[0.04] disabled:text-[#555]"
+    >
+      create managed wallet
+    </button>
+  </div>
+</StepBlock>
 
             {wallet && <Done label="wallet setup" value={wallet} />}
 

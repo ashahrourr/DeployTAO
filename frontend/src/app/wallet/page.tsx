@@ -22,5 +22,4 @@ export default function OverviewPage() {
         </div>
       </section>
     </main>
-  );
-}
+  );}

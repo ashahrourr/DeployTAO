@@ -7,7 +7,7 @@ export default function OverviewPage() {
       <Sidebar />
 
       <section className="flex-1">
-        <Topbar />
+        <Topbar pathname="/settings" />
 
         <div className="flex h-[calc(100vh-56px)] items-center justify-center">
           <div className="text-center">

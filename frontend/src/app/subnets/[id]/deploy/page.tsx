@@ -15,7 +15,7 @@ export default async function DeploySubnetPage({
       <Sidebar />
 
       <section className="flex-1">
-        <Topbar />
+        <Topbar pathname="/subnets" />
 
         {id === "vanta" && <VantaFlow />}
         {id === "chutes" && <ChutesFlow />}

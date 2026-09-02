@@ -3,15 +3,24 @@ import { Sidebar } from "@/src/components/sidebar";
 import { Topbar } from "@/src/components/topbar";
 import Link from "next/link";
 
-const subnetData: Record<string, any> = {
+type Subnet = {
+  name: string;
+  description: string;
+  difficulty: string;
+  estimatedCost: string;
+  hardware: string;
+  rewards: string;
+};
+
+const subnetData: Record<string, Subnet> = {
   vanta: {
     name: "Vanta",
     description:
-      "Trading-focused subnet where miners compete using quantitative strategies and signals.",
+      "Trading-focused subnet where miners submit market signals and compete by PnL, drawdown, and risk discipline.",
     difficulty: "Medium",
-    estimatedCost: "$300–700/mo",
-    hardware: "CPU or GPU server",
-    rewards: "Variable",
+    estimatedCost: "2 vCPU + 8 GB RAM, plus 300-1000 Theta collateral",
+    hardware: "CPU server",
+    rewards: "Variable, performance-based",
   },
 
   chutes: {
@@ -53,7 +62,7 @@ export default async function SubnetDetailPage({
       <Sidebar />
 
       <section className="flex-1">
-        <Topbar />
+        <Topbar pathname="/subnets" />
 
         <div className="mx-auto max-w-3xl px-8 py-14">
           <h1 className="text-4xl font-semibold tracking-tight">

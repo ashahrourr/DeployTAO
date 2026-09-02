@@ -27,8 +27,8 @@ const subnets = [
   },
   {
     name: "Vanta",
-    netuid: "71",
-    description: "Trading strategies",
+    netuid: "8 / 116 test",
+    description: "Trading signals",
     emissions: "15.2%",
     difficulty: "Medium",
   },
@@ -40,7 +40,7 @@ export default function SubnetsPage() {
       <Sidebar />
 
       <section className="flex-1">
-        <Topbar />
+        <Topbar pathname="/subnets" />
 
         <div className="p-6">
           <div className="mb-6 flex items-center justify-between gap-4">
